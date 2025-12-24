@@ -4,136 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For My Forever Nisha</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@900&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
     <style>
-        :root { --neon-pink: #ff007f; --neon-blue: #00e5ff; --gold: #ffd700; }
+        :root { --neon-pink: #ff007f; --neon-blue: #00f3ff; --neon-gold: #ffcf00; --neon-lime: #39FF14; }
         
+        * { box-sizing: border-box; }
         body, html { 
-            margin: 0; padding: 0; width: 100%; height: 100%; 
-            background: #050505; color: white; 
-            font-family: 'Montserrat', sans-serif; overflow: hidden;
+            margin: 0; padding: 0; width: 100%; 
+            background: #000; color: white; 
+            font-family: 'Montserrat', sans-serif; 
+            overflow-x: hidden; /* No horizontal scroll */
+            scroll-behavior: smooth;
         }
 
         canvas { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 1; }
 
-        .wrapper {
-            position: relative; z-index: 10; display: flex; 
-            flex-direction: column; justify-content: center; 
-            align-items: center; height: 100vh; width: 100%; text-align: center;
-        }
-
-        /* Neon Glowing Text */
-        .neon-text {
-            color: #fff;
-            text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px var(--neon-pink), 
-                         0 0 40px var(--neon-pink), 0 0 80px var(--neon-pink);
-            font-family: 'Dancing Script', cursive;
-            font-size: 3rem;
-            margin-bottom: 20px;
+        /* Login Overlay */
+        #login-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, #1a0000 0%, #000 100%);
+            z-index: 100; display: flex; justify-content: center; align-items: center;
         }
 
         #login-box {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 40px;
-            border-radius: 20px;
-            border: 2px solid var(--neon-pink);
-            box-shadow: 0 0 20px var(--neon-pink);
-            transition: 1s;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 50px 30px; border-radius: 30px;
+            border: 1px solid var(--neon-pink);
+            box-shadow: 0 0 30px var(--neon-pink);
+            text-align: center; width: 90%; max-width: 400px;
+            backdrop-filter: blur(10px);
         }
 
         input {
             background: transparent; border: none;
             border-bottom: 2px solid var(--neon-blue);
             padding: 10px; color: var(--neon-blue); font-size: 1.5rem;
-            text-align: center; outline: none; margin: 20px 0;
-            text-shadow: 0 0 10px var(--neon-blue);
+            text-align: center; outline: none; margin: 30px 0;
+            width: 100%; font-family: 'Dancing Script', cursive;
         }
 
-        .btn {
-            background: transparent;
-            color: var(--neon-pink);
-            padding: 12px 40px;
-            border: 2px solid var(--neon-pink);
-            border-radius: 50px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            box-shadow: 0 0 15px var(--neon-pink);
-            transition: 0.4s;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-        .btn:hover { background: var(--neon-pink); color: white; box-shadow: 0 0 30px var(--neon-pink); }
-
-        /* NEON COUPLE ANIMATION */
-        .couple-container {
-            display: none;
-            position: relative;
-            width: 200px;
-            height: 200px;
-            margin-bottom: 20px;
-            animation: pulse 2s infinite;
-        }
-
-        .couple-svg {
-            width: 100%;
-            height: 100%;
-            fill: none;
-            stroke: var(--neon-pink);
-            stroke-width: 1.5;
-            filter: drop-shadow(0 0 10px var(--neon-pink));
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); filter: brightness(1); }
-            50% { transform: scale(1.05); filter: brightness(1.3); }
-        }
-
-        #wish-content { display: none; max-width: 80%; }
-
-        .poem-text {
-            font-size: 1.4rem;
-            line-height: 1.6;
-            color: #fff;
-            text-shadow: 0 0 5px var(--neon-blue);
-            font-style: italic;
-        }
-
-        .lohith-signature {
+        /* Modern Name Styling (The Trend) */
+        .premium-name {
             font-family: 'Dancing Script', cursive;
-            font-size: 3rem;
-            color: var(--gold);
-            text-shadow: 0 0 10px var(--gold), 0 0 20px #ffaa00;
-            margin-top: 30px;
-            opacity: 0;
-            transition: 2s;
+            background: linear-gradient(to right, var(--neon-pink), var(--neon-blue), var(--neon-pink));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite;
+            font-size: clamp(4rem, 15vw, 7rem);
+            filter: drop-shadow(0 0 15px rgba(255, 0, 127, 0.5));
+        }
+
+        @keyframes shine { to { background-position: 200% center; } }
+
+        /* Scrollytelling Sections */
+        .section {
+            width: 100vw; min-height: 100vh;
+            display: flex; flex-direction: column; 
+            justify-content: center; align-items: center;
+            padding: 40px; text-align: center;
+            position: relative; z-index: 10;
+        }
+
+        .fade-in { opacity: 0; transform: translateY(30px); transition: 1.5s all ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        .romantic-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem; font-style: italic;
+            color: #fff; line-height: 1.6;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+            max-width: 700px;
+        }
+
+        .scroll-indicator {
+            position: fixed; bottom: 20px; left: 50%;
+            transform: translateX(-50%); color: var(--neon-blue);
+            font-size: 1.2rem; animation: bounce 2s infinite; z-index: 11;
+        }
+
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);} 40% {transform: translateX(-50%) translateY(-10px);} }
+
+        /* Sparkle Style */
+        .spark {
+            position: fixed; pointer-events: none; z-index: 1000;
+            width: 8px; height: 8px; border-radius: 50%;
+            animation: explode 1s ease-out forwards;
+        }
+        @keyframes explode {
+            0% { transform: translate(0,0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
         }
     </style>
 </head>
-<body>
+<body onmousedown="pop(event)" ontouchstart="pop(event)">
 
-    <canvas id="canvas"></canvas>
+    <canvas id="fireCanvas"></canvas>
 
-    <div class="wrapper">
+    <div id="login-overlay">
         <div id="login-box">
-            <h2 class="neon-text">Nisha's Gift</h2>
-            <input type="text" id="nameInp" placeholder="Your Name">
+            <h2 style="color: var(--neon-pink); font-family: 'Dancing Script'; font-size: 2.5rem;">For Nisha</h2>
+            <input type="text" id="nameInp" placeholder="Enter Your Name">
             <br>
-            <button class="btn" onclick="revealMagic()">Enter Our World</button>
+            <button onclick="revealSite()" style="background:none; border:2px solid var(--neon-pink); color:white; padding:12px 40px; border-radius:50px; cursor:pointer; font-weight:bold; letter-spacing:1px; box-shadow: 0 0 15px var(--neon-pink);">OPEN MY HEART</button>
         </div>
+    </div>
 
-        <div class="couple-container" id="couple">
-            <svg class="couple-svg" viewBox="0 0 100 100">
-                <path d="M40,90 Q40,40 50,30 Q60,40 60,90 M45,30 Q50,10 55,30 M42,25 Q50,5 58,25" />
-                <path d="M50,40 Q30,50 40,70 M50,40 Q70,50 60,70" />
-                <circle cx="50" cy="20" r="8" fill="none" stroke="var(--neon-blue)" />
-            </svg>
-        </div>
+    <div id="main-content" style="display: none;">
+        <div class="scroll-indicator">Scroll Down ↓</div>
 
-        <div id="wish-content">
-            <h1 class="neon-text" style="font-size: 4rem;">Merry Christmas, Nisha!</h1>
-            <p class="poem-text" id="typewriter"></p>
-            <div class="lohith-signature" id="lohith">Lohith ❤️</div>
-        </div>
+        <section class="section">
+            <h1 class="premium-name fade-in">Nisha</h1>
+            <p class="romantic-text fade-in">Merry Christmas, my beautiful queen. <br> You are the magic in my every day.</p>
+        </section>
+
+        <section class="section">
+            <p class="romantic-text fade-in" style="color: var(--neon-lime);">
+                "I didn't want a gift from a shop. I wanted to build a world that glows as much as you do."
+            </p>
+        </section>
+
+        <section class="section">
+            <p class="romantic-text fade-in">
+                To the girl who changed my life... <br>
+                May this Christmas be the start of our best year yet.
+            </p>
+        </section>
+
+        <section class="section">
+            <p class="romantic-text fade-in" style="font-size: 1.2rem;">With all my soul,</p>
+            <h2 class="premium-name fade-in" style="font-size: 5rem;">Lohith</h2>
+            <p class="fade-in" style="color: var(--neon-pink); margin-top: 20px;">❤️ Forever & Always ❤️</p>
+        </section>
     </div>
 
     <audio id="music" loop>
@@ -141,57 +143,56 @@
     </audio>
 
     <script>
-        const canvas = document.getElementById('canvas');
+        const canvas = document.getElementById('fireCanvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
-
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        function revealMagic() {
-            const name = document.getElementById('nameInp').value;
-            if(!name.toLowerCase().includes('nisha')) {
-                alert("Only for Lohith's Nisha! ❤️"); return;
+        function pop(e) {
+            const x = e.clientX || e.touches[0].clientX;
+            const y = e.clientY || e.touches[0].clientY;
+            const colors = ['#ff007f', '#00f3ff', '#ffcf00'];
+            for(let i=0; i<15; i++) {
+                const s = document.createElement('div');
+                s.className = 'spark';
+                s.style.background = colors[Math.floor(Math.random()*colors.length)];
+                s.style.left = x + 'px'; s.style.top = y + 'px';
+                s.style.setProperty('--tx', (Math.random()-0.5)*300 + 'px');
+                s.style.setProperty('--ty', (Math.random()-0.5)*300 + 'px');
+                document.body.appendChild(s);
+                setTimeout(() => s.remove(), 1000);
             }
-
-            document.getElementById('music').play();
-            document.getElementById('login-box').style.display = 'none';
-            document.getElementById('couple').style.display = 'block';
-            document.getElementById('wish-content').style.display = 'block';
-            
-            startTypewriter();
-            setInterval(createNeonFirework, 700);
         }
 
-        const message = "Nisha, in this glowing neon world and the real one, you are my only light. You make my heart beat faster and my life brighter. This Christmas, I promise to love you more than ever before. You are my everything.";
-
-        function startTypewriter() {
-            let i = 0;
-            function type() {
-                if (i < message.length) {
-                    document.getElementById('typewriter').innerHTML += message.charAt(i);
-                    i++;
-                    setTimeout(type, 50);
-                } else {
-                    document.getElementById('lohith').style.opacity = '1';
-                }
+        function revealSite() {
+            if(document.getElementById('nameInp').value.toLowerCase().includes('nisha')) {
+                document.getElementById('music').play();
+                document.getElementById('login-overlay').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                handleScrollEffects();
+            } else {
+                alert("Only for Lohith's Nisha! ❤️");
             }
-            type();
         }
 
-        function createNeonFirework() {
+        function handleScrollEffects() {
+            const observers = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in').forEach(el => observers.observe(el));
+        }
+
+        function spawnParticle() {
             const x = Math.random() * canvas.width;
             const y = Math.random() * canvas.height;
-            const colors = ['#ff007f', '#00e5ff', '#ffd700'];
-            const color = colors[Math.floor(Math.random()*colors.length)];
-            
-            for(let i=0; i<30; i++) {
+            for(let i=0; i<10; i++) {
                 particles.push({
-                    x, y,
-                    dx: (Math.random()-0.5)*10,
-                    dy: (Math.random()-0.5)*10,
-                    life: 1,
-                    color
+                    x, y, dx: (Math.random()-0.5)*5, dy: (Math.random()-0.5)*5,
+                    life: 1, c: Math.random() > 0.5 ? '#ff007f' : '#00f3ff'
                 });
             }
         }
@@ -199,18 +200,14 @@
         function animate() {
             ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
             particles.forEach((p, i) => {
-                p.x += p.dx; p.y += p.dy;
-                p.life -= 0.015;
-                ctx.strokeStyle = p.color;
-                ctx.lineWidth = 2;
-                ctx.beginPath();
-                ctx.moveTo(p.x, p.y);
-                ctx.lineTo(p.x - p.dx, p.y - p.dy);
-                ctx.stroke();
+                p.x += p.dx; p.y += p.dy; p.life -= 0.01;
+                ctx.fillStyle = p.c;
+                ctx.globalAlpha = p.life;
+                ctx.beginPath(); ctx.arc(p.x, p.y, 1.5, 0, Math.PI*2); ctx.fill();
                 if(p.life <= 0) particles.splice(i, 1);
             });
+            if(Math.random() > 0.95) spawnParticle();
             requestAnimationFrame(animate);
         }
         animate();
